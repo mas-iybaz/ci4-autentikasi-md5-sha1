@@ -42,7 +42,7 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// E.g.:
 		$this->session = \Config\Services::session();
-		$this->validation = \Config\Services::validation();
 		$this->users = model('App\Models\AuthModel');
+		$this->validation = \Config\Services::validation();
 	}
 }

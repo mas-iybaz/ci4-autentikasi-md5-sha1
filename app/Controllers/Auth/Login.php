@@ -23,6 +23,7 @@ class Login extends BaseController
     public function loginProcess()
     {
         $request = $this->request;
+
         $nim = $request->getPost('nim');
         $password = $request->getPost('password');
 
@@ -35,6 +36,8 @@ class Login extends BaseController
             $password_sha1 = sha1($password);
 
             if (($password_md5 == $user->password_md5) && ($password_sha1 == $user->password_sha1)) {
+                $this->session->set('nim', $nim);
+
                 return redirect('/');
             } else {
                 return view('auth/login');

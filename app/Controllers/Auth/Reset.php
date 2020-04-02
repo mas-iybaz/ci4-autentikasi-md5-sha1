@@ -29,6 +29,7 @@ class Reset extends BaseController
                     return redirect('auth/login');
                 } else {
                     $data['user'] = $user;
+                    $data['validate'] = $this->validation;
 
                     return view('auth/reset_password', $data);
                 }
@@ -40,19 +41,23 @@ class Reset extends BaseController
     {
         $request = $this->request;
 
-        $nim = $request->getPost('nim');
-        $password = $request->getPost('password');
+        if (!$this->validation->run($request->getPost(), 'resetPassword')) {
+            return redirect()->back()->withInput();
+        } else {
+            $nim = $request->getPost('nim');
+            $password = $request->getPost('password');
 
-        $data = [
-            'password' => $password,
-            'password_sha1' => sha1($password),
-            'password_md5' => md5($password)
-        ];
+            $data = [
+                'password' => $password,
+                'password_sha1' => sha1($password),
+                'password_md5' => md5($password)
+            ];
 
-        $user = $this->users->where('nim', $nim)->first();
+            $user = $this->users->where('nim', $nim)->first();
 
-        $this->users->update($user->id, $data);
+            $this->users->update($user->id, $data);
 
-        return redirect('auth/login');
+            return redirect('auth/login');
+        }
     }
 }

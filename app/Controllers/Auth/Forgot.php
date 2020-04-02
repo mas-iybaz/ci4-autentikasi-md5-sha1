@@ -17,31 +17,39 @@ class Forgot extends BaseController
 
     public function index()
     {
-        return view('auth/forgot_password');
+        if ($this->session->has('nim')) {
+            return redirect('/');
+        } else {
+            return view('auth/forgot_password', ['validate' => $this->validation]);
+        }
     }
 
     public function resetProcess()
     {
         $request = $this->request;
 
-        $nim = $request->getPost('nim');
-        $email = $request->getPost('email');
-
-        $data = [
-            'nim' => $nim,
-            'email' => $email
-        ];
-
-        $user = $this->users->where('nim', $nim)->first();
-
-        if (!$user) {
-            return view('auth/forgot_password');
+        if (!$this->validation->run($request->getPost(), 'forgotPassword')) {
+            return redirect()->back()->withInput();
         } else {
-            if (!($email == $user->email)) {
+            $nim = $request->getPost('nim');
+            $email = $request->getPost('email');
+
+            $data = [
+                '_nim' => $nim,
+                '_email' => $email
+            ];
+
+            $user = $this->users->where('nim', $nim)->first();
+
+            if (!$user) {
                 return view('auth/forgot_password');
             } else {
-                $this->session->set($data);
-                return redirect('auth/reset');
+                if (!($email == $user->email)) {
+                    return view('auth/forgot_password');
+                } else {
+                    $this->session->set($data);
+                    return redirect('auth/reset');
+                }
             }
         }
     }
