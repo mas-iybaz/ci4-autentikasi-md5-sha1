@@ -26,9 +26,7 @@ class Login extends BaseController
         $nim = $request->getPost('nim');
         $password = $request->getPost('password');
 
-        $authModel = model('App\Models\AuthModel');
-
-        $user = $authModel->where('nim', $nim)->first();
+        $user = $this->users->where('nim', $nim)->first();
 
         if (!$user) {
             return view('auth/login');

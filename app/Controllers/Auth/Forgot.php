@@ -23,7 +23,6 @@ class Forgot extends BaseController
     public function resetProcess()
     {
         $request = $this->request;
-        $users = model('App\Models\AuthModel');
 
         $nim = $request->getPost('nim');
         $email = $request->getPost('email');
@@ -33,7 +32,7 @@ class Forgot extends BaseController
             'email' => $email
         ];
 
-        $user = $users->where('nim', $nim)->first();
+        $user = $this->users->where('nim', $nim)->first();
 
         if (!$user) {
             return view('auth/forgot_password');

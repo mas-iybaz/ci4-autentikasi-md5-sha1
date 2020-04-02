@@ -23,7 +23,6 @@ class Register extends BaseController
     public function registerProcess()
     {
         $request = $this->request;
-        $users = model('App\Models\AuthModel');
 
         $password = $request->getPost('password');
 
@@ -38,7 +37,7 @@ class Register extends BaseController
             'password_sha1' => sha1($password)
         ];
 
-        $users->insert($data);
+        $this->users->insert($data);
 
         return redirect('auth/login');
     }
