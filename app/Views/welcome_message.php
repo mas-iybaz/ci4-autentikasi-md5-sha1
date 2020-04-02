@@ -27,8 +27,8 @@
 							<div class="card-title text-center mb-5">
 								<h4>Berhasil Login</h4>
 							</div>
-							<div class="text-center">
-								<button type="submit" class="btn btn-danger">Logout</button>
+							<div class="text-center mt-2">
+								<a href="<?= route_to('logout') ?>" class="btn btn-danger">Keluar</a>
 							</div>
 						</div>
 					</div>

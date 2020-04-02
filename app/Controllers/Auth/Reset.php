@@ -17,10 +17,14 @@ class Reset extends BaseController
 
     public function index()
     {
-        if (!$this->session->has('nim')) {
-            return redirect('auth/login');
+        if (!$this->session->has('_nim')) {
+            if (!$this->session->has('nim')) {
+                return redirect('auth/login');
+            } else {
+                return redirect('/');
+            }
         } else {
-            if (!($this->session->has('email'))) {
+            if (!($this->session->has('_email'))) {
                 return redirect('auth/login');
             } else {
                 $user = $this->users->where(['nim' => $this->session->nim, 'email' => $this->session->email])->first();
