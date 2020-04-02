@@ -25,10 +25,10 @@ class Forgot extends BaseController
             $nim = $request->getPost('nim');
             $email = $request->getPost('email');
 
-            $data = [
-                '_nim' => $nim,
-                '_email' => $email
-            ];
+            // $data = [
+            //     '_nim' => $nim,
+            //     '_email' => $email
+            // ];
 
             $user = $this->users->where('nim', $nim)->first();
 
@@ -38,8 +38,19 @@ class Forgot extends BaseController
                 if (!($email == $user->email)) {
                     return view('auth/forgot_password');
                 } else {
-                    $this->session->set($data);
-                    return redirect('auth/reset');
+                    $mailer = \Config\Services::email();
+
+                    $mailer->setFrom('no-reply@gilgamesh.id', 'Gilgamesh');
+                    $mailer->setTo($email);
+
+                    $mailer->setSubject('Reset Email');
+                    $mailer->setMessage('klik link dibawah ini untuk mengatur kata sandi baru : </br> <a href="localhost:8080/auth/reset/' . $user->nim . '">Reset Password</a>');
+
+                    if ($mailer->send()) {
+                        return view('auth/email_reset');
+                    } else {
+                        return redirect('auth/login');
+                    }
                 }
             }
         }

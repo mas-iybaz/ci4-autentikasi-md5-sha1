@@ -42,7 +42,8 @@ $routes->group('auth', ['namespace' => 'App\Controllers\Auth'], function ($route
 	$routes->post('register', 'Register::registerProcess');
 	$routes->get('forgot', 'Forgot::index', ['as' => 'forgot_password']);
 	$routes->post('forgot', 'Forgot::resetProcess');
-	$routes->get('reset', 'Reset::index', ['as' => 'reset_password']);
+	$routes->get('reset', 'Reset::show', ['as' => 'reset_password']);
+	$routes->get('reset/(:segment)', 'Reset::index/$1');
 	$routes->post('reset', 'Reset::update');
 });
 

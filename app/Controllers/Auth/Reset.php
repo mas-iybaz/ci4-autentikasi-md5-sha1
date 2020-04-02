@@ -6,7 +6,26 @@ use App\Controllers\BaseController;
 
 class Reset extends BaseController
 {
-    public function index()
+    public function index($nim)
+    {
+        $user = $this->users->where('nim', $nim)->first();
+
+        if (!$user) {
+            return redirect('auth');
+        } else {
+            $data = [
+                '_nim' => $user->nim,
+                'nim' => $user->nim,
+                '_email' => $user->email
+            ];
+
+            $this->session->set($data);
+
+            return redirect('reset_password');
+        }
+    }
+
+    public function show()
     {
         if (!$this->session->has('_nim')) {
             if (!$this->session->has('nim')) {
@@ -18,7 +37,7 @@ class Reset extends BaseController
             if (!($this->session->has('_email'))) {
                 return redirect('auth/login');
             } else {
-                $user = $this->users->where(['nim' => $this->session->nim, 'email' => $this->session->email])->first();
+                $user = $this->users->where(['nim' => $this->session->_nim, 'email' => $this->session->_email])->first();
 
                 if (!$user) {
                     return redirect('auth/login');
