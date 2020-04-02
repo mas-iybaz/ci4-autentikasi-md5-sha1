@@ -25,11 +25,6 @@ class Forgot extends BaseController
             $nim = $request->getPost('nim');
             $email = $request->getPost('email');
 
-            // $data = [
-            //     '_nim' => $nim,
-            //     '_email' => $email
-            // ];
-
             $user = $this->users->where('nim', $nim)->first();
 
             if (!$user) {
