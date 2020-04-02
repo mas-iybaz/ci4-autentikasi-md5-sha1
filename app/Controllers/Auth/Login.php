@@ -6,15 +6,6 @@ use App\Controllers\BaseController;
 
 class Login extends BaseController
 {
-    /**
-     * Constructor.
-     */
-    public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
-    {
-        // Do Not Edit This Line
-        parent::initController($request, $response, $logger);
-    }
-
     public function index()
     {
         return view('auth/login');
