@@ -9,6 +9,9 @@ class Register extends BaseController
 {
     public function index()
     {
+        if ($this->session->has('nim')) {
+            return redirect('/');
+        }
         return view('auth/register', ['validate' => $this->validation]);
     }
 

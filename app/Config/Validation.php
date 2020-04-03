@@ -46,12 +46,41 @@ class Validation
 		'nim' => 'required|numeric|is_unique[users.nim]',
 		'email' => 'required|valid_email|is_unique[users.email]',
 		'password' => 'required|min_length[8]',
-		'confirm_password' => 'required|matches[password]',
+		'confirm_password' => 'matches[password]',
 		'address' => 'required|string',
 		'phone' => 'required|numeric'
 	];
 
-	public $register_errors = [];
+	public $register_errors = [
+		'fullname' => [
+			'required' => 'Nama lengkap wajib diisi',
+			'alpha_space' => 'Nama lengkap harus berupa abjad'
+		],
+		'nim' => [
+			'required' => 'NIM wajib diisi',
+			'numeric' => 'NIM harus berupa angka',
+			'is_unique' => 'NIM sudah terdaftar'
+		],
+		'email' => [
+			'required' => 'Email wajib diisi',
+			'valid_email' => 'Masukkan format email dengan benar',
+			'is_unique' => 'Email sudah terdaftar',
+		],
+		'address' => [
+			'required' => 'Alamat wajib diisi',
+		],
+		'phone' => [
+			'required' => 'No. Telepon wajib diisi',
+			'numeric' => 'No. Telepon harus berupa angka'
+		],
+		'password' => [
+			'required' => 'Password wajib diisi',
+			'min_length' => 'Panjang minimal 8 karakter'
+		],
+		'confirm_password' => [
+			'matches' => 'Konfirmasi password tidak sesuai dengan password'
+		]
+	];
 
 	// Validation for Forgot Password
 	public $forgotPassword = [
@@ -59,7 +88,18 @@ class Validation
 		'email' => 'required|valid_email|is_not_unique[users.email]'
 	];
 
-	public $forgotPassword_errors = [];
+	public $forgotPassword_errors = [
+		'nim' => [
+			'required' => 'NIM wajib diisi',
+			'numeric' => 'NIM harus berupa angka',
+			'is_not_unique' => 'NIM tidak tersedia'
+		],
+		'email' => [
+			'required' => 'Email wajib diisi',
+			'valid_email' => 'Masukkan format email dengan benar',
+			'is_not_unique' => 'Email tidak tersedia',
+		],
+	];
 
 	// Validation for Reset Password
 	public $resetPassword = [
@@ -67,5 +107,13 @@ class Validation
 		'confirm_password' => 'required|matches[password]',
 	];
 
-	public $resetPassword_errors = [];
+	public $resetPassword_errors = [
+		'password' => [
+			'required' => 'Password baru wajib diisi',
+			'min_length' => 'Panjang minimal 8 karakter'
+		],
+		'confirm_password' => [
+			'matches' => 'Konfirmasi password tidak sesuai dengan password'
+		]
+	];
 }

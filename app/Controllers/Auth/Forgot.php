@@ -40,7 +40,7 @@ class Forgot extends BaseController
                     $mailer->setTo($email);
 
                     $mailer->setSubject('Reset Email');
-                    $mailer->setMessage('klik link dibawah ini untuk mengatur kata sandi baru : </br> <a href="localhost:8080/auth/reset/' . $user->password_hash . '">Reset Password</a>');
+                    $mailer->setMessage('klik link dibawah ini untuk mengatur kata sandi baru : </br> <a href="localhost:8080/auth/reset/' . $user->nim . '">Reset Password</a>');
 
                     if ($mailer->send()) {
                         return view('auth/email_reset');

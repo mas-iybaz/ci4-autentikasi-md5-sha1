@@ -6,9 +6,9 @@ use App\Controllers\BaseController;
 
 class Reset extends BaseController
 {
-    public function index($hash)
+    public function index($key)
     {
-        $user = $this->users->where('password_hash', $hash)->first();
+        $user = $this->users->where('nim', $key)->first();
 
         if (!$user) {
             return redirect('auth');

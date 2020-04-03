@@ -8,6 +8,9 @@ class Login extends BaseController
 {
     public function index()
     {
+        if ($this->session->has('nim')) {
+            return redirect('/');
+        }
         return view('auth/login');
     }
 

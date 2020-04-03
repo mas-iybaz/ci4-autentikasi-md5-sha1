@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group">
                             <label for="confirm_password">Konfirmasi Password</label>
-                            <input type="confirm_password" class="form-control" id="confirm_password" name="confirm_password">
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                             <p class="small text-danger"><?= $validate->showError('confirm_password') ?></p>
                         </div>
                         <div class="text-center">
