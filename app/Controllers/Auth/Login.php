@@ -27,9 +27,13 @@ class Login extends BaseController
             $password_sha1 = sha1($password);
 
             if (($password_md5 == $user->password_md5) && ($password_sha1 == $user->password_sha1)) {
-                $this->session->set('nim', $nim);
+                if (password_verify($password, $user->password_hash)) {
+                    $this->session->set('nim', $nim);
 
-                return redirect('/');
+                    return redirect('/');
+                } else {
+                    return view('auth/login');
+                }
             } else {
                 return view('auth/login');
             }

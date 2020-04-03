@@ -11,5 +11,5 @@ class AuthModel extends Model
 
     protected $returnType = 'object';
 
-    protected $allowedFields = ['fullname', 'nim', 'email', 'password', 'password_sha1', 'password_md5', 'address', 'phone'];
+    protected $allowedFields = ['fullname', 'nim', 'email', 'password', 'password_sha1', 'password_md5', 'password_hash', 'address', 'phone'];
 }

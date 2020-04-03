@@ -29,7 +29,8 @@ class Register extends BaseController
                 'email' => $request->getPost('email'),
                 'password' => $password,
                 'password_md5' => md5($password),
-                'password_sha1' => sha1($password)
+                'password_sha1' => sha1($password),
+                'password_hash' => password_hash($password, PASSWORD_DEFAULT)
             ];
 
             $this->users->insert($data);

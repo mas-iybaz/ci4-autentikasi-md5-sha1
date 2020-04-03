@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <label for="address">Alamat</label>
-                            <input type="text" class="form-control" id="address" name="address" value="<?= old('nim') ?>">
+                            <input type="text" class="form-control" id="address" name="address" value="<?= old('address') ?>">
                             <p class="small text-danger"><?= $validate->showError('address') ?></p>
                         </div>
                         <div class="form-group">
