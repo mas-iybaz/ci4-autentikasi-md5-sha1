@@ -6,6 +6,7 @@ use CodeIgniter\Model;
 
 class AuthModel extends Model
 {
+    // Bangun konfigurasi tabel 'users' terhadap AuthModel
     protected $table      = 'users';
     protected $primaryKey = 'id';
 

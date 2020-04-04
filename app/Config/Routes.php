@@ -31,8 +31,11 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+// Route untuk halaman berhasil login
 $routes->get('/', 'Home::index');
 
+// Route untuk autentikasi
 $routes->group('auth', ['namespace' => 'App\Controllers\Auth'], function ($routes) {
 	$routes->get('/', 'Login::index');
 	$routes->get('login', 'Login::index', ['as' => 'login']);

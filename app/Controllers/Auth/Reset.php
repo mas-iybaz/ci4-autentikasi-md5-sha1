@@ -8,6 +8,7 @@ class Reset extends BaseController
 {
     public function index($key)
     {
+        // Cari user berdasar nim yang dijadikan parameter saat reset password akun
         $user = $this->users->where('nim', $key)->first();
 
         if (!$user) {
@@ -19,6 +20,7 @@ class Reset extends BaseController
                 '_email' => $user->email
             ];
 
+            // Buat session untuk reset password
             $this->session->set($data);
 
             return redirect('reset_password');
@@ -51,10 +53,12 @@ class Reset extends BaseController
         }
     }
 
+    // Fungsi untuk reset password
     public function update()
     {
         $request = $this->request;
 
+        // Jalankan validasi untuk reset-password
         if (!$this->validation->run($request->getPost(), 'resetPassword')) {
             return redirect()->back()->withInput();
         } else {
@@ -67,8 +71,10 @@ class Reset extends BaseController
                 'password_md5' => md5($password)
             ];
 
+            // Cari user berdasarkan nim
             $user = $this->users->where('nim', $nim)->first();
 
+            // Update data password baru user
             $this->users->update($user->id, $data);
 
             return redirect('auth/login');
